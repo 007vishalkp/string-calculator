@@ -2,19 +2,25 @@ class StringCalculator
     def add(input)
         return 0 if input.empty?
     
-        delimiter = /,|\n/
+        delimiter_pattern = /,|\n/
+    
         if input.start_with?("//")
-          delimiter_part, input = input.split("\n", 2)
-          delimiter = Regexp.escape(delimiter_part[2])
+          delimiter_section, input = input.split("\n", 2)
+    
+          if delimiter_section.include?("[")
+            custom_delimiters = delimiter_section.scan(/\[(.*?)\]/).flatten
+            pattern_string = custom_delimiters.map { |d| Regexp.escape(d) }.join("|")
+            delimiter_pattern = Regexp.new(pattern_string)
+          else
+            delimiter_pattern = Regexp.new(Regexp.escape(delimiter_section[2]))
+          end
         end
     
-        numbers = input.split(/#{delimiter}/).map(&:to_i).reject { |n| n > 1000 }
-        
+        numbers = input.split(delimiter_pattern).map(&:to_i)
+    
         negatives = numbers.select { |n| n < 0 }
-        if negatives.any?
-          raise "Negative numbers not allowed: #{negatives.join(', ')}"
-        end
+        raise "Negative numbers not allowed: #{negatives.join(', ')}" if negatives.any?
     
-        numbers.sum
+        numbers.reject { |n| n > 1000 }.sum
     end
 end
