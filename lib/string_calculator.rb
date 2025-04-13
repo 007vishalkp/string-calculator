@@ -8,7 +8,7 @@ class StringCalculator
           delimiter = Regexp.escape(delimiter_part[2])
         end
     
-        numbers = input.split(/#{delimiter}/).map(&:to_i)
+        numbers = input.split(/#{delimiter}/).map(&:to_i).reject { |n| n > 1000 }
         
         negatives = numbers.select { |n| n < 0 }
         if negatives.any?
