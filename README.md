@@ -20,7 +20,7 @@ This repository implements a `StringCalculator` class using the principles of **
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/vishalkp/string-calculator
+git clone https://github.com/007vishalkp/string-calculator
 cd string-calculator
 ```
 
@@ -46,4 +46,4 @@ rspec
 
 ## 🔗 Submission
 
-Hosted publicly at: [GitHub Repo Link Here](https://github.com/vishalkp/string-calculator)
+Hosted publicly at: [GitHub Repo Link Here](https://github.com/007vishalkp/string-calculator)
